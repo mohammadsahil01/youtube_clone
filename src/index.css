@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+body {
+  background-color: black;
+  color: white; /* You may want to set text color to make content visible on a black background */
+}
