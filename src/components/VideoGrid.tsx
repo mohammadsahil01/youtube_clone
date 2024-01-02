@@ -1,6 +1,10 @@
-import { YOUTUBE_VIDEOS_API } from "@/lib/url"
+import { YOUTUBE_RESULTS_API, YOUTUBE_VIDEOS_API } from "@/lib/url"
 import VideoCard from "./Videocard"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { currentVideos, setCurrentVideos } from "@/lib/videosSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { selectCurrentCategory } from "@/lib/CategorySlice"
+
 
 
 
@@ -8,28 +12,45 @@ import { useEffect, useState } from "react"
 
 
 export const VideoGrid = ()=>{
+    const dispatch = useDispatch()
+    const Videos = useSelector(currentVideos)
+    const Category = useSelector(selectCurrentCategory)
 
-    const [videos,setVideos] = useState<any>()
     useEffect(()=>{
-        const getVideos=async()=>{
-            let url
-            url = YOUTUBE_VIDEOS_API
-        const response = await fetch(url)
-        const data = await response.json()
-            setVideos(data.items)
+        console.log(Category)
+    },[Category])
+
+    useEffect(()=>{
+            const getVideos=async()=>{
+                let url
+                if(Category &&Category!=="All"){   
+                    url = YOUTUBE_RESULTS_API+Category
+                    console.log(YOUTUBE_RESULTS_API+Category) 
+                }else{
+                    url = YOUTUBE_VIDEOS_API
+                    console.log(url)
+                }
+                const response = await fetch(url)
+                const data = await response.json()
+                
+                dispatch(setCurrentVideos(data.items))
+                console.log(data.items)               
         }
         getVideos()
-    },[])
+    },[Category,dispatch])
 
     return(
-        !videos?(<div>loading</div>):
-        (<div className="m-20 mt-7 gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
-            {videos.map((video:any)=> 
-            <div className="pb-6">
+        !Videos?(<div>loading</div>):
+        (<div className="mt-7 mx-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 hover:transition-all ">
+            {Videos.map((video:any)=> 
+            
+             <div key={video.id} className="" >
                 <VideoCard 
-                video={video}
+                video={video} 
             />
             </div>
+
+           
             )}
         </div>)
     )
