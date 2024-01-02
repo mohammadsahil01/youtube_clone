@@ -1,6 +1,44 @@
-
+import { PROXY_URL, YOUTUBE_CHANNEL_SEARCH_API, YOUTUBE_SEARCH_SUGGESTION_API } from "@/lib/url";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cacheResults, selectCacheResults } from "@/lib/searchSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [suggestions,setSuggestions]=useState([]);
+  const [showSuggestion,setShowSuggestion] = useState(false);
+  const [searchQuery,setSearchQuery]= useState("");
+  const searchCache = useSelector(selectCacheResults)
+  
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      if(searchCache[searchQuery]){
+        setSuggestions(searchCache[searchQuery])
+      }else{
+        getSuggestion()
+      }
+    });
+
+    return ()=>{
+      clearTimeout(timer)
+    }
+  },[searchQuery])
+
+  const getSuggestion =async () => {
+      const response = await fetch(PROXY_URL+YOUTUBE_SEARCH_SUGGESTION_API+searchQuery);
+      
+      const data = await response.json();
+
+      setSuggestions(data[1]);
+
+      dispatch(cacheResults({
+        [searchQuery]:data[1]
+      })
+      );
+  };
+
     return (
       <div>
         <form>
@@ -11,8 +49,11 @@ export const SearchBar = () => {
                 id="search-dropdown"
                 className=" caret-white p-2.5 text-sm bg-black rounded-full border-l-2 border border-gray-600 w-full dark:bg-gray-700 dark:border-l-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Search"
+                onChange={e=>setSearchQuery(e.target.value)}
+                onFocus={()=>setShowSuggestion(true)}
                 required
               />
+              <Link to ={"/searchResults?q="+searchQuery}>
               <button
                 type="submit"
                 className="absolute top-0 right-0 p-2.5 px-5 text-sm font-medium h-full text-white bg-gray-900 rounded-r-full border border-gray-600 focus:outline-none focus:ring-blue-300"
@@ -33,8 +74,25 @@ export const SearchBar = () => {
                   />
                 </svg>
               </button>
+              </Link>
 
             </div>
+            {showSuggestion&& (
+              <div>
+                <ul>
+                  {suggestions.map((s)=>(
+                    <Link to={"/searchResults?q="+s}>
+                    <li key={s}
+                    onClick={()=>setShowSuggestion(false)}
+                    className="py-2 px-3"
+                    >
+                      {s}
+                    </li>
+                    </Link>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </form>
       </div>

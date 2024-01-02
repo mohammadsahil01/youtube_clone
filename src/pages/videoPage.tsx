@@ -1,4 +1,5 @@
 
+import { Appbar } from "@/components/Appbar";
 import { HorizontalCard } from "@/components/HorizontalCard";
 import { currentVideos } from "@/lib/videosSlice";
 import { useSelector } from "react-redux";
@@ -15,7 +16,7 @@ export default function VideoPage (){
      const currentVideo = Videos?.filter((video:any)=>video.id===params.id)
      
     return <div>
-        
+        <Appbar/>
         <div className="mt-5 flex flex-col lg:flex-row px-5 gap-3">
             <div className=" lg:w-8/12">
             <iframe
