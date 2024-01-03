@@ -12,8 +12,8 @@ export default function VideoPage (){
     console.log( `${params.id}`)
     
     
-     const filterVideos = Videos?.filter((video:any)=>video.id!=params.id)
-     const currentVideo = Videos?.filter((video:any)=>video.id===params.id)
+     const filterVideos = Videos?.filter((video:any)=>(video.id.videoId?video.id.videoId:video.id)!=params.id)
+     const currentVideo = Videos?.filter((video:any)=>(video.id.videoId?video.id.videoId:video.id)===params.id)
      
     return <div>
         <Appbar/>

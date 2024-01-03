@@ -1,3 +1,4 @@
+import { useMetaData } from "@/lib/useMetaData";
 import moment from "moment";
 import numeral from "numeral";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -19,20 +20,22 @@ function VideoCard({video}:any){
     const { channelTitle, title, thumbnails, publishedAt }
        = video.snippet;
     const id = video.id
+
+    const {_duration,views} = useMetaData(id,video)
     
-    const seconds = moment.duration(video.contentDetails?.duration).asSeconds();
-    const duration = moment.utc(seconds*1000).format("mm:ss")
+    // const seconds = moment.duration(video.contentDetails?.duration).asSeconds();
+    // const duration = moment.utc(seconds*1000).format("mm:ss")
     
-    const views = video.statistics?.viewCount;
+    // const views = video.statistics?.viewCount;
 
 
-    return <div className="hover:cursor-pointer hover:bg-slate-950 rounded-xl p-4 grid-cols-12 " onClick={()=>navigate(`/video/${id}`)}>
+    return <div className="hover:cursor-pointer hover:bg-slate-950 rounded-xl p-4 grid-cols-12 " onClick={()=>navigate("/video/"+(video.id.videoId?video.id.videoId:video.id))}>
       <div className=" pt-3 relative col-span-10 ">
         <LazyLoadImage src={thumbnails?.medium.url} className="rounded-xl" alt="Thumbnail" />
       
         
         <div className="absolute bottom-1 px-1 opacity-90 right-2 bg-black text-white rounded">
-          <span className="text-sm">{duration}</span>
+          <span className="text-sm">{_duration}</span>
       </div>
       </div>
         <div className="grid grid-cols-12 ">

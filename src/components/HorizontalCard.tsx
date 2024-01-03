@@ -2,23 +2,27 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom"
 import numeral from "numeral";
 import {LazyLoadImage} from "react-lazy-load-image-component"
+import { useMetaData } from "@/lib/useMetaData";
 export const HorizontalCard = ({video}:any)=>{
     const { channelTitle, title, thumbnails, publishedAt }
        = video.snippet;
     const id = video.id
     
-    const seconds = moment.duration(video.contentDetails.duration).asSeconds();
-    const duration = moment.utc(seconds*1000).format("mm:ss")
+
+    const {_duration,views} = useMetaData(id,video)
+    // const seconds = moment.duration(video.contentDetails.duration).asSeconds();
+    // const duration = moment.utc(seconds*1000).format("mm:ss")
+    // const views = video.statistics?.viewCount;
     const navigate = useNavigate()
-    const views = video.statistics?.viewCount;
+    
     return <>
-    <div className="hover:cursor-pointer hover:bg-slate-950 pl-4 p-2 rounded-2xl" onClick={()=>navigate(`/video/${id}`)}>
+    <div className="hover:cursor-pointer hover:bg-slate-950 pl-4 p-2 rounded-2xl" onClick={()=>navigate(`/video/`+(video.id.videoId?video.id.videoId:video.id))}>
     
         {video? <div className="grid grid-cols-12 gap-2 ">
         <div className=" col-span-4 relative">
             <LazyLoadImage src={thumbnails?.medium.url} className="rounded-xl" alt="Thumbnail" />
             <div className="absolute bottom-1 px-1 opacity-90 right-1 bg-black text-white rounded">
-               <span className="text-sm">{duration}</span>
+               <span className="text-sm">{_duration}</span>
             </div>
         </div>
 

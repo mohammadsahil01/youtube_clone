@@ -44,7 +44,7 @@ export const VideoGrid = ()=>{
         (<div className="mt-7 mx-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 hover:transition-all ">
             {Videos.map((video:any)=> 
             
-             <div key={video.id} className="" >
+             <div key={video.id.videoId?video.id.videoId:video.id}  >
                 <VideoCard 
                 video={video} 
             />

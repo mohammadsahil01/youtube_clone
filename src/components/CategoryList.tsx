@@ -4,7 +4,7 @@ import {selectCurrentCategory, setCategory } from "@/lib/CategorySlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const list = [
-  "All", "Music", "Comedy", "Cricket", "Coding",
+  "All","Music", "Comedy", "Cricket", "Coding",
   "Shopping", "Trailers","News",
 ];
 
@@ -19,7 +19,7 @@ function CategoryList() {
   return (
     <div className="mx-5 mt-5 flex flex-wrap gap-3">
       {list.map((category: string, index) => (
-        <div key={index} className="">
+        <div key={index}>
           <Button
             onClick={() => {
               onclick(category)

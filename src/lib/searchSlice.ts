@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+
 const searchSlice = createSlice({
   name: "search",
   initialState: {
     suggestionObj : {},
+    searchVideos:[],
     isClose: true
   },
   reducers: {
@@ -14,12 +16,17 @@ const searchSlice = createSlice({
     },
     closeSuggestions: (state, action) =>{
       state.isClose = action.payload;
+    },
+    AddSearchVideos:(state,action)=>{
+      state.searchVideos=action.payload
     }
   },
 });
 
-export const { cacheResults, closeSuggestions } = searchSlice.actions;
+export const { cacheResults, closeSuggestions,AddSearchVideos } = searchSlice.actions;
 
 export const selectCacheResults = (store:any)=>store?.search?.suggestionObj
+
+export const SelectSearchVideos = (store:any)=>store.search.searchVideos
 
 export default searchSlice.reducer;

@@ -1,8 +1,8 @@
-import { PROXY_URL, YOUTUBE_CHANNEL_SEARCH_API, YOUTUBE_SEARCH_SUGGESTION_API } from "@/lib/url";
+import { PROXY_URL, YOUTUBE_SEARCH_SUGGESTION_API } from "@/lib/url";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cacheResults, selectCacheResults } from "@/lib/searchSlice";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate, Link } from "react-router-dom";
 
 export const SearchBar = () => {
   const navigate = useNavigate()
@@ -19,7 +19,7 @@ export const SearchBar = () => {
       }else{
         getSuggestion()
       }
-    });
+    },200);
 
     return ()=>{
       clearTimeout(timer)
@@ -30,7 +30,7 @@ export const SearchBar = () => {
       const response = await fetch(PROXY_URL+YOUTUBE_SEARCH_SUGGESTION_API+searchQuery);
       
       const data = await response.json();
-
+      console.log(data)
       setSuggestions(data[1]);
 
       dispatch(cacheResults({
@@ -51,7 +51,14 @@ export const SearchBar = () => {
                 placeholder="Search"
                 onChange={e=>setSearchQuery(e.target.value)}
                 onFocus={()=>setShowSuggestion(true)}
-                required
+                required={true}
+                onKeyDown={(e)=>{
+                  if(e.key==="Enter"){
+                    setShowSuggestion(false);
+                    navigate("/searchResults?q="+searchQuery)
+                }
+
+              }}
               />
               <Link to ={"/searchResults?q="+searchQuery}>
               <button
@@ -79,13 +86,28 @@ export const SearchBar = () => {
             </div>
             {showSuggestion&& (
               <div>
-                <ul>
+                <ul className="absolute z-10 rounded-xl bg-slate-800">
                   {suggestions.map((s)=>(
                     <Link to={"/searchResults?q="+s}>
                     <li key={s}
                     onClick={()=>setShowSuggestion(false)}
-                    className="py-2 px-3"
+                    className=" py-2 px-3 w-full flex items-center gap-4 hover:bg-slate-500"
                     >
+                        <svg
+                      className="w-4 h-4"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 20"
+                        >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                      />
+                    </svg>
                       {s}
                     </li>
                     </Link>

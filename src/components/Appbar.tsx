@@ -2,7 +2,6 @@
 import { SearchBar } from "./SearchBar"
 
 export const Appbar = ()=>{
-    
     return <div className="flex justify-between pt-3 px-6 ">
 
         <a href="/"
