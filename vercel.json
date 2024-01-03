@@ -1,16 +1,8 @@
 {
     "routes": [
       {
-        "src": "^/video/([^/]+)$",
-        "dest": "/video/:id"
-      },
-      {
-        "src": "^/searchResults",
-        "dest": "/searchResults"
-      },
-      {
-        "src": "^/(.*)$",
-        "dest": "/index.html"
+        "src": "/[^.]+",
+        "dest": "/"
       }
     ]
   }
