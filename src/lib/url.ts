@@ -1,7 +1,6 @@
-const GOOGLE_API_KEY = "AIzaSyDclZ8WJ2_LPvILrTN5sTp2dnh_udFgsV0";
-// const GOOGLE_API_KEY = "AIzaSyBP3rUzeBj0BtDauNlr_5qgXT9-Gscq1c0";
 
-export const LIVE_CHAT_COUNT = 25;
+const GOOGLE_API_KEY = import.meta.env.GOOGLE_API_KEY;
+// const GOOGLE_API_KEY = "AIzaSyBP3rUzeBj0BtDauNlr_5qgXT9-Gscq1c0";
 
 export const PROXY_URL = "https://cors-proxy.fringe.zone/";
 
