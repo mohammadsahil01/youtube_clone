@@ -10,7 +10,6 @@ import { SearchPage } from '@/pages/searchPage';
 
 function App() {
 
-
   return (
     <Provider store={store}>
     <div>
