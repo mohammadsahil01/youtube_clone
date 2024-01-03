@@ -1,12 +1,12 @@
 
-import './App.css'
+import '@/App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage'
-import VideoPage from './pages/VideoPage';
+import HomePage from '@/pages/HomePage'
+import VideoPage from '@/pages/VideoPage';
 
 import { Provider } from 'react-redux';
-import store from './lib/store';
-import { SearchPage } from './pages/searchPage';
+import store from '@/lib/store';
+import { SearchPage } from '@/pages/searchPage';
 
 function App() {
 
