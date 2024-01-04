@@ -1,5 +1,5 @@
 
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const GOOGLE_API_KEY = import.meta.env.VITE_APP_GOOGLE_API_KEY;
 // const GOOGLE_API_KEY = "AIzaSyBP3rUzeBj0BtDauNlr_5qgXT9-Gscq1c0";
 
 export const PROXY_URL = "https://cors-proxy.fringe.zone/";
