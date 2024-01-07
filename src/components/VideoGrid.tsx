@@ -25,7 +25,7 @@ export const VideoGrid = ()=>{
                 let url
                 if(Category &&Category!=="All"){   
                     url = YOUTUBE_RESULTS_API+Category
-                    console.log(YOUTUBE_RESULTS_API+Category) 
+                    
                 }else{
                     url = YOUTUBE_VIDEOS_API
                     console.log(url)

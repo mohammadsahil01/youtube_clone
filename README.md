@@ -1,3 +1,49 @@
+# YouTube Clone
+This project is a simple YouTube clone built using React with TypeScript and Redux for state management. It aims to replicate some of the basic functionalities of the popular video-sharing platform.
+
+# Features
+Video Listing: Display a list of videos with titles, thumbnails, and other relevant information.
+
+Video Player: Play selected videos within the application.
+
+Search Functionality: Search for videos based on keywords.
+
+Redux State Management: Utilize Redux for efficient state management.
+
+![screenshot](screenshot.png)
+
+# Technologies Used
+React,
+TypeScript,
+Redux and Tailwind CSS
+
+# Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/your-username/youtube_clone.git
+Install dependencies:
+
+bash
+Copy code
+cd youtube_clone
+npm install
+Run the development server:
+
+bash
+Copy code
+npm start
+The application should now be running on http://localhost:3000.
+
+# Usage
+Explore the video listings.
+Click on a video to play it.
+Use the search functionality to find specific videos.
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
