@@ -1,6 +1,8 @@
 # YouTube Clone
 This project is a simple YouTube clone built using React with TypeScript and Redux for state management. It aims to replicate some of the basic functionalities of the popular video-sharing platform.
 
+Live Link -https://youtube-clone-rouge-eight.vercel.app/
+
 # Features
 Video Listing: Display a list of videos with titles, thumbnails, and other relevant information.
 
