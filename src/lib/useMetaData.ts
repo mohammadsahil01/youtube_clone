@@ -16,7 +16,7 @@ export const useMetaData =(id:any,video:any)=>{
             const response = await fetch(YOUTUBE_VIDEO_METADATA_API+id?.videoId)
             const data = await response.json()
             const item = data?.items[0]
-    
+            
             setDuration(item?.contentDetails?.duration);
             setViews(item?.statistics?.viewCount);
         }else{

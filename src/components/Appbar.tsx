@@ -5,9 +5,10 @@ export const Appbar = ()=>{
     return <div className="flex justify-between pt-3 px-6 ">
 
         <a href="/"
-        className="hover:cursor-pointer"
+        className="hover:cursor-pointer font-bold text-xl"
         >
         Youtube
+       
         </a>
 
         <div className="w-5/12">
