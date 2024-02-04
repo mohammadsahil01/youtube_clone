@@ -12,7 +12,7 @@ export default function HomePage() {
       <Appbar/>
       <div className='flex'>
         <Sidebar/>
-        <div>
+        <div className="w-full">
         <CategoryList/>
         <VideoGrid/>
         </div>
